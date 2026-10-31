@@ -1,0 +1,19 @@
+// Settings for Cloudflare Workers, the service that runs the site online.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "blockboost-ads",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-10-30",
+  // nodejs_compat lets the site use Node features like node:crypto
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": { "directory": ".open-next/assets", "binding": "ASSETS" },
+  // The D1 database. The code reaches it as env.DB.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "blockboost-orders",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
