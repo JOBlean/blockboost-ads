@@ -4,7 +4,7 @@
     python orders.py status 3 Delivered   change order 3's status
 
 It uses the same admin key as the /admin page, read from ADMIN-KEY.txt.
-Set ADS_URL to the live site address; it defaults to the local dev server (npm run dev).
+It talks to the live site; set ADS_URL=http://localhost:3000 to use the local dev server.
 """
 import json
 import os
@@ -14,7 +14,7 @@ from pathlib import Path
 
 HERE = Path(__file__).parent
 KEY = (HERE / "ADMIN-KEY.txt").read_text().strip()
-BASE = os.environ.get("ADS_URL", "http://localhost:3000").rstrip("/")
+BASE = os.environ.get("ADS_URL", "https://blockboost-ads.jbmcnichols3.workers.dev").rstrip("/")
 
 
 def call(method, path, body=None):
@@ -23,7 +23,13 @@ def call(method, path, body=None):
         BASE + path,
         method=method,
         data=json.dumps(body).encode() if body is not None else None,
-        headers={"Authorization": f"Bearer {KEY}", "Content-Type": "application/json"},
+        headers={
+            "Authorization": f"Bearer {KEY}",
+            "Content-Type": "application/json",
+            # Cloudflare blocks Python's default "Python-urllib" label as a bot (error 1010),
+            # so name this script instead.
+            "User-Agent": "blockboost-orders-cli/1.0",
+        },
     )
     with urllib.request.urlopen(req) as res:  # "with" closes the connection when done
         return json.load(res)
