@@ -4,7 +4,15 @@ An ordering site for a Roblox game-advertising service. Customers browse ad pack
 place an order, and get an order number. The owner manages orders on a private,
 key-protected page.
 
+**Live site:** https://blockboost-ads.jbmcnichols3.workers.dev
+
 **Stack:** Next.js 16 (App Router) · React 19 · Cloudflare Workers via OpenNext · Cloudflare D1 (SQLite)
+
+## Screenshots
+
+| Landing page | Order form | Admin (locked) |
+|---|---|---|
+| ![Landing page with ad packages](docs/screenshots/home.png) | ![Order form](docs/screenshots/order.png) | ![Admin unlock screen](docs/screenshots/admin.png) |
 
 ## Pages
 
