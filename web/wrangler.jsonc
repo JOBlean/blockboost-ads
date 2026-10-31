@@ -12,7 +12,7 @@
     {
       "binding": "DB",
       "database_name": "blockboost-orders",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "08a6e26c-2810-4154-a41d-b4b7addbc23d",
       "migrations_dir": "migrations"
     }
   ]
